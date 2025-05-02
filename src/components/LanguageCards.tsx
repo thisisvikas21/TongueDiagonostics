@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Predict = () => {
+const LanguageCards = () => {
   return (
     <div>
 
@@ -8,4 +8,4 @@ const Predict = () => {
   )
 }
 
-export default Predict
+export default LanguageCards

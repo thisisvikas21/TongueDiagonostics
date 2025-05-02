@@ -1,0 +1,37 @@
+import React from "react";
+
+const Navbar = () => {
+  return (
+    <header className="sticky top-0 z-[100] h-16 bg-black/95 bg-opacity-80 p-6 text-white shadow-lg flex justify-center items-center">
+      <div className="container mx-auto flex items-center justify-between">
+        <div className="text-3xl font-bold">Voice of Nation</div>
+        <nav>
+          <ul className="flex space-x-6">
+            <li>
+              <a href="#home" className="hover:text-amber-500">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="#about" className="hover:text-amber-500">
+                About
+              </a>
+            </li>
+            <li>
+              <a href="#contact" className="hover:text-amber-500">
+                Contact
+              </a>
+            </li>
+            <li>
+              <a href="#github" className="hover:text-amber-500">
+                GitHub
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;

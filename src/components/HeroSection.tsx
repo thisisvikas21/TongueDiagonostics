@@ -1,54 +1,45 @@
-"use client";
-
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 import React from "react";
-import { Vortex } from "@/components/ui/vortex";
-import { motion } from "framer-motion";
 
 export function HeroSection() {
-    return (
-        <div className="w-[calc(100%-4rem)] mx-auto rounded-md h-[30rem] overflow-hidden">
-            <Vortex
-                backgroundColor="black"
-                className="flex items-center flex-col justify-center px-2 md:px-10 py-4 w-full h-full relative"
-            >
-                <motion.h2
-                    className="text-white text-2xl md:text-6xl font-bold text-center"
-                    initial={{ y: -20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 1 }}
-                >
-                    Unlock the Power of Language Recognition
-                </motion.h2>
-                <motion.p
-                    className="text-white text-sm md:text-2xl max-w-xl mt-6 text-center"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1.5 }}
-                >
-                    Detect any Indian language from just a voice clip. A
-                    seamless and intuitive solution powered by AI and Deep
-                    Learning.
-                </motion.p>
-                <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
-                    {/* Call to Action Buttons */}
-                    <motion.button
-                        className="px-6 py-3 bg-amber-500 hover:bg-amber-600 transition duration-300 rounded-lg text-white shadow-md transform hover:scale-105"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1 }}
-                    >
-                        Get Started
-                    </motion.button>
-                    <motion.button
-                        className="px-6 py-3 bg-transparent border-2 border-white text-white rounded-lg transition duration-300 hover:bg-white hover:text-black"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1 }}
-                    >
-                        Learn More
-                    </motion.button>
-                </div>
-            </Vortex>
-        </div>
-    );
+  return (
+    <div className="relative flex h-[50rem] w-full items-center justify-center bg-black overflow-hidden">
+      {/* Grid background */}
+      <div
+        className={cn(
+          "absolute inset-0 opacity-20",
+          "bg-[size:40px_40px]",
+          "bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)]",
+        )}
+      />
+
+      {/* Radial gradient overlay */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center [mask-image:radial-gradient(ellipse_at_center,transparent_30%,black)]"></div>
+
+      {/* Content container */}
+      <div className="relative z-20 flex flex-col items-center justify-center gap-6 px-4 text-center max-w-4xl mx-auto">
+        <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text text-transparent">
+          Voice of the Nation
+        </h1>
+
+        <p className="text-2xl sm:text-3xl font-medium bg-gradient-to-b from-neutral-400 to-neutral-600 bg-clip-text text-transparent">
+          Speak, Identify, Connect
+        </p>
+
+        <p className="text-base sm:text-lg text-neutral-400 max-w-2xl">
+          Instantly classify spoken audio across 10 Indian languages — powered
+          by deep learning. Perfect for call centers, virtual assistants, and
+          multilingual services.
+        </p>
+
+        <Link
+          href="/camera"
+          className="mt-8 px-8 py-3 rounded-md bg-white text-black font-medium hover:bg-neutral-200 transition-colors"
+        >
+          Try Demo →
+        </Link>
+      </div>
+    </div>
+  );
 }
