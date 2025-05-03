@@ -12,7 +12,7 @@ export function MeetTheTeam() {
             title: "Sindhuja Reddy",
             image: "/six.png",
             className: "absolute top-40 left-[25%] rotate-[-7deg]",
-            rollNo: "Sindhuja Reddy",
+            rollNo: "B21158",
         },
         {
             title: "Jay Shorey",
@@ -36,14 +36,14 @@ export function MeetTheTeam() {
             title: "Vikas Sharma",
             image: "/two.png",
             className: "absolute top-32 left-[55%] rotate-[10deg]",
-            rollNo: "S23118",
+            rollNo: "S23117",
         },
 
         {
             title: "Jagannath Prasad Sahoo",
             image: "/one.png",
             className: "absolute top-10 left-[20%] rotate-[-5deg]",
-            rollNo: "S23117",
+            rollNo: "S23118",
         },
     ];
     return (
