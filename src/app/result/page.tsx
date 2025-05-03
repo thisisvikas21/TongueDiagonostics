@@ -219,18 +219,14 @@ export default function ResultsPage() {
 
     useEffect(() => {
         // Debug: Check what's actually in sessionStorage
-        console.log("All sessionStorage:", {
-            analysisResults: sessionStorage.getItem("analysisResults"),
-            capturedImage:
-                sessionStorage.getItem("capturedImage")?.slice(0, 50) + "...",
-        });
+
 
         const storedResults = sessionStorage.getItem("analysisResults");
-        console.log(storedResults);
+
         if (storedResults) {
             try {
                 const parsed = JSON.parse(storedResults);
-                console.log("Parsed results:", parsed);
+                
                 setResult(parsed);
             } catch (error) {
                 console.error("Failed to parse results:", error);
