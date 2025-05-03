@@ -1,7 +1,15 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Leaf, HeartPulse, BrainCircuit, ScanEye } from "lucide-react";
+import {
+    Leaf,
+    HeartPulse,
+    BrainCircuit,
+    ScanEye,
+    Award,
+    Clock,
+    Users,
+} from "lucide-react";
 import { MeetTheTeam } from "@/components/MeetTheTeam";
 
 const AboutPage = () => {
@@ -10,25 +18,32 @@ const AboutPage = () => {
             icon: <ScanEye className="h-8 w-8 text-rose-500" />,
             title: "AI-Powered Analysis",
             description:
-                "Our deep learning model accurately analyzes tongue features with 95% clinical accuracy",
+                "Our deep learning model analyzes tongue features with clinical accuracy",
         },
         {
             icon: <BrainCircuit className="h-8 w-8 text-blue-500" />,
-            title: "Modern Technology",
-            description:
-                "Combining computer vision with traditional diagnostic wisdom",
+            title: "Rapid Prototyping",
+            description: "Built in 72 hours during the AITeck Hackathon",
         },
         {
             icon: <Leaf className="h-8 w-8 text-green-500" />,
             title: "Holistic Approach",
-            description:
-                "We assess multiple health indicators through tongue examination",
+            description: "Combining TCM wisdom with modern technology",
+        },
+    ];
+
+    const hackathonDetails = [
+        {
+            icon: <Clock className="h-6 w-6" />,
+            text: "72-hour intensive development",
         },
         {
-            icon: <HeartPulse className="h-8 w-8 text-purple-500" />,
-            title: "Preventive Care",
-            description:
-                "Early detection of potential health issues through non-invasive means",
+            icon: <Users className="h-6 w-6" />,
+            text: "Team of 4 cross-disciplinary developers",
+        },
+        {
+            icon: <Award className="h-6 w-6" />,
+            text: "Mentored by HCLTech and IIT Mandi experts",
         },
     ];
 
@@ -47,19 +62,70 @@ const AboutPage = () => {
                         animate={{ y: 0 }}
                         className="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl mb-6"
                     >
-                        Bridging{" "}
-                        <span className="text-rose-600">Ancient Wisdom</span>{" "}
-                        and{" "}
-                        <span className="text-blue-600">Modern Technology</span>
+                        <span className="text-rose-600">Hackathon</span>{" "}
+                        Innovation
                     </motion.h1>
                     <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                        Our mission is to make traditional tongue diagnosis
-                        accessible through AI-powered analysis
+                        Developed at AITeck Hackathon 2025 by HCLTech and IIT
+                        Mandi
                     </p>
                 </div>
 
+                {/* Hackathon Story */}
+                <div className="bg-white rounded-2xl shadow-sm overflow-hidden mb-16 border border-gray-100">
+                    <div className="grid grid-cols-1 lg:grid-cols-2">
+                        <div className="p-8 md:p-12">
+                            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                                Our Origin Story
+                            </h2>
+                            <p className="text-gray-600 mb-4">
+                                This project was conceived during the intense
+                                72-hour AITeck Hackathon organized by HCLTech in
+                                collaboration with IIT Mandi from May 2-4, 2025.
+                                Our team recognized the potential to bridge
+                                traditional medicine with AI technology.
+                            </p>
+                            <p className="text-gray-600 mb-6">
+
+                            </p>
+
+                            <div className="space-y-3">
+                                {hackathonDetails.map((detail, index) => (
+                                    <div
+                                        key={index}
+                                        className="flex items-center gap-3"
+                                    >
+                                        <span className="text-rose-500">
+                                            {detail.icon}
+                                        </span>
+                                        <span className="text-gray-700">
+                                            {detail.text}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="bg-gray-50 flex items-center justify-center p-8">
+                            <div className="bg-gradient-to-br from-blue-50 to-rose-50 rounded-xl p-8 w-full h-full flex items-center justify-center">
+                                <div className="text-center">
+                                    <Award className="h-12 w-12 mx-auto text-rose-500 mb-4" />
+                                    <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                                        AITeck Hackathon 2025
+                                    </h3>
+                                    <p className="text-gray-600">
+                                        HCLTech × IIT Mandi
+                                    </p>
+                                    <p className="text-sm text-gray-500 mt-4">
+                                        May 2-4, 2025
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Features Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                     {features.map((feature, index) => (
                         <motion.div
                             key={index}
@@ -83,58 +149,22 @@ const AboutPage = () => {
                     ))}
                 </div>
 
-                {/* Story Section */}
-                <div className="bg-white rounded-2xl shadow-sm overflow-hidden mb-16">
-                    <div className="grid grid-cols-1 lg:grid-cols-2">
-                        <div className="p-12">
-                            <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                                Our Story
-                            </h2>
-                            <p className="text-gray-600 mb-4">
-                                Founded in 2023, AITongueInsights was born from
-                                a collaboration between traditional medicine
-                                practitioners and AI researchers. We recognized
-                                the untapped potential of combining
-                                centuries-old diagnostic techniques with modern
-                                computer vision.
-                            </p>
-                            <p className="text-gray-600">
-                                Our team of TCM specialists, data scientists,
-                                and healthcare professionals have created a
-                                platform that delivers instant, accurate tongue
-                                analysis while respecting the depth of
-                                traditional diagnostic methods.
-                            </p>
-                        </div>
-                        <div className="bg-gray-100 min-h-[300px] lg:min-h-full">
-                            {/* Placeholder for image - replace with your actual image */}
-                            <div className="h-full flex items-center justify-center text-gray-400">
-                                <span>
-                                    Team photo or diagnostic illustration
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 {/* Team Section */}
                 <div className="text-center mb-16">
                     <h2 className="text-3xl font-bold text-gray-900 mb-12">
-                        Meet Our Team
+                        Meet The Team
                     </h2>
-                    <div className="">
-                        <MeetTheTeam />
-                    </div>
+                    <MeetTheTeam />
                 </div>
 
                 {/* CTA Section */}
-                <div className="bg-gradient-to-r from-rose-500 to-rose-600 rounded-2xl p-12 text-center text-white">
+                <div className="bg-gradient-to-r from-blue-500 to-rose-500 rounded-2xl p-12 text-center text-white">
                     <h2 className="text-3xl font-bold mb-4">
-                        Ready to Experience AI-Powered Diagnostics?
+                        Experience Our Hackathon Innovation
                     </h2>
-                    <p className="text-rose-100 mb-8 max-w-2xl mx-auto">
-                        Join thousands of users who have gained valuable health
-                        insights through our platform
+                    <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
+                        Try our proof-of-concept that blends traditional
+                        diagnostics with AI technology
                     </p>
                 </div>
             </div>

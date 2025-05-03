@@ -143,8 +143,8 @@ export function HeroSection() {
                 >
                     {[
                         { value: "95%", label: "Accuracy" },
-                        { value: "~10ms", label: "Analysis Time" },
-                        { value: "20+", label: "Health Indicators" },
+                        { value: "~5s", label: "Analysis Time" },
+                        { value: "4", label: "Health Metrics" },
                     ].map((stat, index) => (
                         <motion.div
                             key={index}
