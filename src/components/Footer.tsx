@@ -20,7 +20,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="bg-neutral-900 text-white py-10 px-6 md:px-20"
+            className="bg-black text-white py-10 px-6 md:px-20"
         >
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
                 {/* Logos Section */}
@@ -64,8 +64,7 @@ export default function Footer() {
                 {/* Copyright */}
                 <div className="md:text-right space-y-2 text-sm text-neutral-400">
                     <p>
-                        &copy; {new Date().getFullYear()} YourCompanyName. All
-                        rights reserved.
+                        &copy; {new Date().getFullYear()} All rights reserved.
                     </p>
                     <p></p>
                 </div>
