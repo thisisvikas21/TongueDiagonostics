@@ -58,7 +58,7 @@ const SendImage = () => {
             setMessage(null);
 
             // Basic validation
-            if (file.size > 5 * 1024 * 1024) {
+            if (file.size > 100 * 1024 * 1024) {
                 throw new Error("Image too large (max 5MB)");
             }
 
