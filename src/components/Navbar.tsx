@@ -9,8 +9,7 @@ const Navbar = () => {
 
     const navItems = [
         { name: "Home", href: "/" },
-        { name: "About", href: "#about" },
-        { name: "Contact", href: "#contact" },
+        { name: "About", href: "/about" },
         {
             name: "GitHub",
             href: "#github",
@@ -35,7 +34,7 @@ const Navbar = () => {
                     whileHover={{ scale: 1.05 }}
                     className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-violet-400 to-blue-600 bg-clip-text text-transparent"
                 >
-                    AITongueInsights
+                    <Link href="/">AITongueInsights</Link>
                 </motion.div>
 
                 {/* Desktop Navigation */}

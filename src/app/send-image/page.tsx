@@ -117,7 +117,7 @@ const SendImage = () => {
     const mockAPICall = async (imageUrl: string) => {
         await new Promise((resolve) => setTimeout(resolve, 2000));
         return {
-            score: 7.5, // Your 0-10 score
+            score: 7.5,
             metrics: {
                 color: 8,
                 coating: 7,
