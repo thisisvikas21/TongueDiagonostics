@@ -1,45 +1,153 @@
-import { cn } from "@/lib/utils";
-import Link from "next/link";
+"use client";
 import React from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function HeroSection() {
-  return (
-    <div className="relative flex h-[50rem] w-full items-center justify-center bg-black overflow-hidden">
-      {/* Grid background */}
-      <div
-        className={cn(
-          "absolute inset-0 opacity-20",
-          "bg-[size:40px_40px]",
-          "bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)]",
-        )}
-      />
+    // Animation variants
+    const container = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.3,
+            },
+        },
+    };
 
-      {/* Radial gradient overlay */}
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center [mask-image:radial-gradient(ellipse_at_center,transparent_30%,black)]"></div>
+    const item = {
+        hidden: { opacity: 0, y: 20 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    };
 
-      {/* Content container */}
-      <div className="relative z-20 flex flex-col items-center justify-center gap-6 px-4 text-center max-w-4xl mx-auto">
-        <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text text-transparent">
-          Voice of the Nation
-        </h1>
+    const statsContainer = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: {
+                when: "beforeChildren",
+                staggerChildren: 0.2,
+                delay: 1,
+            },
+        },
+    };
 
-        <p className="text-2xl sm:text-3xl font-medium bg-gradient-to-b from-neutral-400 to-neutral-600 bg-clip-text text-transparent">
-          Speak, Identify, Connect
-        </p>
+    const statItem = {
+        hidden: { opacity: 0, y: 20 },
+        show: { opacity: 1, y: 0 },
+    };
 
-        <p className="text-base sm:text-lg text-neutral-400 max-w-2xl">
-          Instantly classify spoken audio across 10 Indian languages — powered
-          by deep learning. Perfect for call centers, virtual assistants, and
-          multilingual services.
-        </p>
+    return (
+        <div className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-slate-50">
+            {/* Background elements */}
+            <div className="pointer-events-none absolute inset-0 z-0 h-full w-full bg-white [mask-image:radial-gradient(transparent,white)]" />
 
-        <Link
-          href="/camera"
-          className="mt-8 px-8 py-3 rounded-md bg-white text-black font-medium hover:bg-neutral-200 transition-colors"
-        >
-          Try Demo →
-        </Link>
-      </div>
-    </div>
-  );
+            {/* Content container */}
+            <motion.div
+                initial="hidden"
+                animate="show"
+                variants={container}
+                className="relative z-20 mx-auto max-w-6xl px-4 text-center"
+            >
+                <motion.div
+                    variants={item}
+                    className="mb-6 inline-flex items-center rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-600 shadow-sm"
+                >
+                    <motion.span
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ repeat: Infinity, duration: 2 }}
+                        className="mr-2 h-2 w-2 rounded-full bg-rose-500"
+                    />
+                    Revolutionizing Traditional Diagnostics
+                </motion.div>
+
+                <motion.h1
+                    variants={item}
+                    className={cn(
+                        "text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl",
+                        "bg-gradient-to-r from-gray-900 via-rose-800 to-gray-900 bg-clip-text text-transparent"
+                    )}
+                >
+                    AI-Powered Tongue{" "}
+                    <span className="whitespace-nowrap">Diagnostics</span>
+                </motion.h1>
+
+                <motion.p
+                    variants={item}
+                    className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600"
+                >
+                    Tongue analysis has long been used in Eastern medicine as a
+                    window into the body's internal health. Our deep learning
+                    model digitizes this ancient practice to deliver real-time
+                    health insights.
+                </motion.p>
+
+                <motion.div
+                    variants={item}
+                    className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+                >
+                    <Button
+                        asChild
+                        className="rounded-full px-8 py-6 text-lg font-semibold shadow-lg transition-all hover:scale-105"
+                    >
+                        <Link href="/camera">
+                            <motion.span
+                                whileHover={{ x: 2 }}
+                                className="flex items-center"
+                            >
+                                Take a Picture{" "}
+                                <ArrowRight className="ml-2 h-4 w-4" />
+                            </motion.span>
+                        </Link>
+                    </Button>
+                    <Button
+                        variant="outline"
+                        className="rounded-full px-8 py-6 text-lg font-semibold"
+                    >
+                        <motion.span whileHover={{ x: 2 }}>
+                            Learn How It Works
+                        </motion.span>
+                    </Button>
+                </motion.div>
+            </motion.div>
+
+            {/* Stats preview */}
+            <motion.div
+                initial="hidden"
+                animate="show"
+                variants={statsContainer}
+                className="absolute bottom-10 left-0 right-0 z-20 mx-auto hidden max-w-7xl px-6 md:block"
+            >
+                <motion.div
+                    variants={item}
+                    whileHover={{ scale: 1.02 }}
+                    className="grid grid-cols-3 gap-8 rounded-2xl bg-white/80 p-6 backdrop-blur-md"
+                >
+                    {[
+                        { value: "95%", label: "Accuracy" },
+                        { value: "~10ms", label: "Analysis Time" },
+                        { value: "20+", label: "Health Indicators" },
+                    ].map((stat, index) => (
+                        <motion.div
+                            key={index}
+                            variants={statItem}
+                            whileHover={{ scale: 1.05 }}
+                            className="text-center"
+                        >
+                            <p className="text-3xl font-bold text-rose-600">
+                                {stat.value}
+                            </p>
+                            <p className="mt-1 text-sm font-medium text-gray-500">
+                                {stat.label}
+                            </p>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </motion.div>
+        </div>
+    );
 }
