@@ -5,7 +5,7 @@ import { Leaf, AlertTriangle, CheckCircle, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 interface AnalysisResult {
-    score: number; // 0-10
+    score: number;
     metrics: {
         color: number;
         coating: number;
@@ -196,7 +196,6 @@ const ResultsDisplay = ({ result }: { result: AnalysisResult }) => {
     );
 };
 
-// Example usage with sample data
 const sampleResult: AnalysisResult = {
     score: 5,
     metrics: {
@@ -218,7 +217,6 @@ export default function ResultsPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Debug: Check what's actually in sessionStorage
 
 
         const storedResults = sessionStorage.getItem("analysisResults");
@@ -226,7 +224,7 @@ export default function ResultsPage() {
         if (storedResults) {
             try {
                 const parsed = JSON.parse(storedResults);
-                
+
                 setResult(parsed);
             } catch (error) {
                 console.error("Failed to parse results:", error);
@@ -248,8 +246,7 @@ export default function ResultsPage() {
         setLoading(false);
 
         return () => {
-            // Optional: Clear only if you want single-use results
-            // sessionStorage.removeItem("analysisResults");
+
         };
     }, []);
     if (loading) {

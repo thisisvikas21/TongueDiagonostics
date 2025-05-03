@@ -9,34 +9,41 @@ import {
 export function MeetTheTeam() {
     const items = [
         {
-            title: "Naruto",
-            image: images.naruto,
-            className: "absolute top-10 left-[20%] rotate-[-5deg]",
-            role: "Developer",
-        },
-        {
-            title: "Minato",
-            image: images.minato,
+            title: "Sindhuja Reddy",
+            image: "/six.png",
             className: "absolute top-40 left-[25%] rotate-[-7deg]",
-            role: "Developer",
+            rollNo: "Sindhuja Reddy",
         },
         {
-            title: "Sasuke",
-            image: images.sasuke,
+            title: "Jay Shorey",
+            image: "/five.png",
+            className: "absolute top-40 left-[25%] rotate-[-7deg]",
+            rollNo: "B21251",
+        },
+        {
+            title: "Abhinav Arya",
+            image: "/four.png",
             className: "absolute top-5 left-[40%] rotate-[8deg]",
-            role: "Developer",
+            rollNo: "B21001",
         },
         {
-            title: "Kakashi",
-            image: images.kakashi,
+            title: "Jagadeesh Rachapudi",
+            image: "/three.png",
             className: "absolute top-32 left-[55%] rotate-[10deg]",
-            role: "Developer",
+            rollNo: "S23096",
         },
         {
-            title: "Asuma",
-            image: images.asuma,
+            title: "Vikas Sharma",
+            image: "/two.png",
             className: "absolute top-32 left-[55%] rotate-[10deg]",
-            role: "Developer",
+            rollNo: "S23118",
+        },
+
+        {
+            title: "Jagannath Prasad Sahoo",
+            image: "/one.png",
+            className: "absolute top-10 left-[20%] rotate-[-5deg]",
+            rollNo: "S23117",
         },
     ];
     return (
@@ -54,7 +61,7 @@ export function MeetTheTeam() {
                     <h3 className="mt-4 text-center text-2xl font-bold text-neutral-700 dark:text-neutral-300">
                         {item.title}
                     </h3>
-                    <p className="text-sm text-gray-400">{item.role}</p>
+                    <p className="text-sm text-gray-400">{item.rollNo}</p>
                 </DraggableCardBody>
             ))}
         </DraggableCardContainer>

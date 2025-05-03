@@ -37,13 +37,12 @@ const SendImage = () => {
     const [isUploading, setIsUploading] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    // Load image from session on mount
     useEffect(() => {
         const storedImage = sessionStorage.getItem("capturedImage");
         if (storedImage) setImageUrl(storedImage);
 
         return () => {
-            setIsAnalyzing(false); // Cleanup any ongoing analysis
+            setIsAnalyzing(false);
         };
     }, []);
 
@@ -57,7 +56,6 @@ const SendImage = () => {
             setIsUploading(true);
             setMessage(null);
 
-            // Basic validation
             if (file.size > 100 * 1024 * 1024) {
                 throw new Error("Image too large (max 5MB)");
             }
@@ -92,16 +90,14 @@ const SendImage = () => {
         setMessage(null);
 
         try {
-            // Simulate API call (replace with actual implementation)
-            const analysisResults = await mockAPICall(imageUrl); // Your analysis function
+         
+            const analysisResults = await mockAPICall(imageUrl);
 
-            // Store full results in sessionStorage
             sessionStorage.setItem(
                 "analysisResults",
                 JSON.stringify(analysisResults)
             );
 
-            // Redirect to results page
             router.push("/result");
         } catch (error) {
             setMessage({
@@ -113,7 +109,6 @@ const SendImage = () => {
         }
     };
 
-    // Mock API function (replace with your actual API call)
     const mockAPICall = async (imageUrl: string) => {
         await new Promise((resolve) => setTimeout(resolve, 2000));
         return {
@@ -168,10 +163,9 @@ const SendImage = () => {
                                     onClick={analyzeImage}
                                     loadingStates={analysisSteps}
                                     duration={1500}
-                                    loading={isAnalyzing} // Pass the parent's loading state
+                                    loading={isAnalyzing}
                                     onComplete={() => {
                                         setIsAnalyzing(false);
-                                        // Add any completion logic here
                                     }}
                                     onCancel={() => {
                                         setIsAnalyzing(false);

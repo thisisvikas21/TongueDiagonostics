@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Camera, ArrowLeft, Circle } from "lucide-react";
+import { Camera, ArrowLeft, Circle, FlipHorizontal } from "lucide-react";
 import { motion } from "framer-motion";
 
 const CameraPage = () => {
@@ -11,32 +11,57 @@ const CameraPage = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [stream, setStream] = useState<MediaStream | null>(null);
     const [isCameraReady, setIsCameraReady] = useState(false);
+    const [isFrontCamera, setIsFrontCamera] = useState(false);
     const router = useRouter();
 
-    // Start Camera on Load
-    useEffect(() => {
-        const startCamera = async () => {
+    const startCamera = async (facingMode: "user" | "environment") => {
+        try {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+            }
+
+            setIsCameraReady(false);
+
+            const userStream = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode: facingMode }
+            });
+
+            setStream(userStream);
+            if (videoRef.current) {
+                videoRef.current.srcObject = userStream;
+                videoRef.current.onloadedmetadata = () => {
+                    setIsCameraReady(true);
+                };
+            }
+        } catch (error) {
+            console.error("Error accessing camera:", error);
             try {
-                const userStream = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: { exact: "environment" } },
+                const fallbackStream = await navigator.mediaDevices.getUserMedia({
+                    video: true
                 });
-                setStream(userStream);
+                setStream(fallbackStream);
                 if (videoRef.current) {
-                    videoRef.current.srcObject = userStream;
+                    videoRef.current.srcObject = fallbackStream;
                     videoRef.current.onloadedmetadata = () => {
                         setIsCameraReady(true);
                     };
                 }
-            } catch (error) {
-                console.error("Error accessing camera:", error);
+            } catch (fallbackError) {
             }
-        };
+        }
+    };
 
-        startCamera();
+    useEffect(() => {
+        startCamera("environment");
         return () => stopCamera();
     }, []);
 
-    // Capture Image and Store in Session
+    const toggleCamera = () => {
+        const newMode = isFrontCamera ? "environment" : "user";
+        setIsFrontCamera(!isFrontCamera);
+        startCamera(newMode);
+    };
+
     const captureImage = () => {
         const canvas = canvasRef.current;
         const video = videoRef.current;
@@ -46,13 +71,20 @@ const CameraPage = () => {
             canvas.height = video.videoHeight;
             context?.drawImage(video, 0, 0, canvas.width, canvas.height);
 
+            if (isFrontCamera) {
+                context?.save();
+                context?.translate(canvas.width, 0);
+                context?.scale(-1, 1);
+                context?.drawImage(video, 0, 0, canvas.width, canvas.height);
+                context?.restore();
+            }
+
             const imageUrl = canvas.toDataURL("image/png");
             sessionStorage.setItem("capturedImage", imageUrl);
             router.push("/send-image");
         }
     };
 
-    // Stop Camera
     const stopCamera = () => {
         if (stream) {
             stream.getTracks().forEach((track) => track.stop());
@@ -74,7 +106,15 @@ const CameraPage = () => {
                 <h1 className="text-xl sm:text-2xl font-bold text-center flex-1">
                     Tongue Scanner
                 </h1>
-                <div className="w-8"></div> {/* Spacer for balance */}
+                <motion.button
+                    onClick={toggleCamera}
+                    whileTap={{ scale: 0.9 }}
+                    disabled={!isCameraReady}
+                    className="p-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors"
+                    title="Switch Camera"
+                >
+                    <FlipHorizontal className="h-5 w-5" />
+                </motion.button>
             </header>
 
             {/* Camera Feed */}
@@ -86,7 +126,7 @@ const CameraPage = () => {
                     muted
                     className={`w-full h-full object-cover transition-opacity ${
                         isCameraReady ? "opacity-100" : "opacity-0"
-                    }`}
+                    } ${isFrontCamera ? "scale-x-[-1]" : ""}`}
                 ></video>
                 <canvas ref={canvasRef} className="hidden"></canvas>
 
