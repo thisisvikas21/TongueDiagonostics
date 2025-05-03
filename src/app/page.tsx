@@ -7,6 +7,8 @@ import Comparision from "@/components/Comparision";
 import FAQ from "@/components/FAQ";
 import { ScrollResult } from "@/components/ScrollResult";
 import AboutSection from "@/components/AboutSection";
+import Footer from "@/components/Footer";
+import SpecialThanks from "@/components/SpecialThanks";
 const Home = () => {
     return (
         <div className="flex min-h-screen flex-col gap-8">
@@ -16,6 +18,8 @@ const Home = () => {
             <ScrollResult />
             <TechStack />
             <AboutSection />
+            <SpecialThanks />
+            <Footer />
         </div>
     );
 };
