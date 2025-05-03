@@ -13,6 +13,7 @@ import {
     XCircle,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const analysisSteps = [
     { text: "Uploading image" },
@@ -26,6 +27,7 @@ const analysisSteps = [
 ];
 
 const SendImage = () => {
+    const router = useRouter();
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [message, setMessage] = useState<{
         text: string;
@@ -90,16 +92,17 @@ const SendImage = () => {
         setMessage(null);
 
         try {
-            // Simulate API call
-            await new Promise((resolve) => setTimeout(resolve, 8000));
+            // Simulate API call (replace with actual implementation)
+            const analysisResults = await mockAPICall(imageUrl); // Your analysis function
 
-            // const response = await fetch("/api/analyze", {...});
+            // Store full results in sessionStorage
+            sessionStorage.setItem(
+                "analysisResults",
+                JSON.stringify(analysisResults)
+            );
 
-            setMessage({
-                text: "Analysis complete! View your health report",
-                type: "success",
-            });
-            sessionStorage.removeItem("capturedImage");
+            // Redirect to results page
+            router.push("/result");
         } catch (error) {
             setMessage({
                 text: "Analysis failed. Please try again.",
@@ -108,6 +111,25 @@ const SendImage = () => {
         } finally {
             setIsAnalyzing(false);
         }
+    };
+
+    // Mock API function (replace with your actual API call)
+    const mockAPICall = async (imageUrl: string) => {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        return {
+            score: 7.5, // Your 0-10 score
+            metrics: {
+                color: 8,
+                coating: 7,
+                texture: 6,
+                shape: 8,
+            },
+            recommendations: [
+                "Increase water intake",
+                "Practice tongue scraping daily",
+                "Reduce spicy foods",
+            ],
+        };
     };
 
     return (
