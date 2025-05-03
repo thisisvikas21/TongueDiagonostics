@@ -31,27 +31,55 @@ const SendImage = () => {
         text: string;
         type: "success" | "error";
     } | null>(null);
-    const fileInputRef = useRef<HTMLInputElement>(null);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
+    const [isUploading, setIsUploading] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
+    // Load image from session on mount
     useEffect(() => {
         const storedImage = sessionStorage.getItem("capturedImage");
-        if (storedImage) {
-            setImageUrl(storedImage);
-        }
+        if (storedImage) setImageUrl(storedImage);
+
+        return () => {
+            setIsAnalyzing(false); // Cleanup any ongoing analysis
+        };
     }, []);
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = async (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
         const file = event.target.files?.[0];
-        if (file) {
+        if (!file) return;
+
+        try {
+            setIsUploading(true);
+            setMessage(null);
+
+            // Basic validation
+            if (file.size > 5 * 1024 * 1024) {
+                throw new Error("Image too large (max 5MB)");
+            }
+
             const reader = new FileReader();
             reader.onloadend = () => {
                 const base64Image = reader.result as string;
                 sessionStorage.setItem("capturedImage", base64Image);
                 setImageUrl(base64Image);
-                setMessage(null);
+                setIsUploading(false);
+            };
+            reader.onerror = () => {
+                throw new Error("Failed to read file");
             };
             reader.readAsDataURL(file);
+        } catch (error) {
+            setIsUploading(false);
+            setMessage({
+                text:
+                    error instanceof Error
+                        ? error.message
+                        : "Failed to load image",
+                type: "error",
+            });
         }
     };
 
@@ -221,7 +249,7 @@ const SendImage = () => {
                         className="mt-6 w-full"
                     >
                         <Link
-                            href="/results"
+                            href="/"
                             className="block py-3 px-6 rounded-xl font-medium bg-gray-900 text-white text-center hover:bg-gray-800 transition-colors"
                         >
                             View Detailed Results
