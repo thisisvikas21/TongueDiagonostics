@@ -92,7 +92,7 @@ export function HeroSection() {
                 >
                     <Button
                         asChild
-                        className="rounded-full px-8 py-6 text-lg font-semibold shadow-lg transition-all hover:scale-105"
+                        className="rounded-full px-8 py-6 text-lg font-semibold shadow-lg transition-all hover:scale-105 md:hidden "
                     >
                         <Link href="/camera">
                             <motion.span
@@ -100,6 +100,20 @@ export function HeroSection() {
                                 className="flex items-center"
                             >
                                 Take a Picture{" "}
+                                <ArrowRight className="ml-2 h-4 w-4" />
+                            </motion.span>
+                        </Link>
+                    </Button>
+                    <Button
+                        asChild
+                        className="rounded-full px-8 py-6 text-lg font-semibold shadow-lg transition-all hover:scale-105 hidden lg:flex "
+                    >
+                        <Link href="/send-image">
+                            <motion.span
+                                whileHover={{ x: 2 }}
+                                className="flex items-center"
+                            >
+                                Choose a Picture{" "}
                                 <ArrowRight className="ml-2 h-4 w-4" />
                             </motion.span>
                         </Link>
