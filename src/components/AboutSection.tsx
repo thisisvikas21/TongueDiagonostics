@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { MeetTheTeam } from "@/components/MeetTheTeam";
 
-const AboutPage = () => {
+const AboutSection = () => {
     const features = [
         {
             icon: <ScanEye className="h-8 w-8 text-rose-500" />,
@@ -53,58 +53,14 @@ const AboutPage = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             className="min-h-screen bg-gradient-to-b from-gray-50 to-white"
+            id="about"
         >
             <div className="max-w-6xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
                 {/* Hero Section */}
-                <div className="text-center mb-16">
-                    <motion.h1
-                        initial={{ y: -20 }}
-                        animate={{ y: 0 }}
-                        className="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl mb-6"
-                    >
-                        <span className="text-rose-600">Hackathon</span>{" "}
-                        Innovation
-                    </motion.h1>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                        Developed at AITeck Hackathon 2025 by HCLTech and IIT
-                        Mandi
-                    </p>
-                </div>
 
                 {/* Hackathon Story */}
                 <div className="bg-white rounded-2xl shadow-sm overflow-hidden mb-16 border border-gray-100">
-                    <div className="grid grid-cols-1 lg:grid-cols-2">
-                        <div className="p-8 md:p-12">
-                            <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                                Our Origin Story
-                            </h2>
-                            <p className="text-gray-600 mb-4">
-                                This project was conceived during the intense
-                                72-hour AITeck Hackathon organized by HCLTech in
-                                collaboration with IIT Mandi from May 2-4, 2025.
-                                Our team recognized the potential to bridge
-                                traditional medicine with AI technology.
-                            </p>
-                            <p className="text-gray-600 mb-6">
-
-                            </p>
-
-                            <div className="space-y-3">
-                                {hackathonDetails.map((detail, index) => (
-                                    <div
-                                        key={index}
-                                        className="flex items-center gap-3"
-                                    >
-                                        <span className="text-rose-500">
-                                            {detail.icon}
-                                        </span>
-                                        <span className="text-gray-700">
-                                            {detail.text}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                    <div className="grid grid-cols-1 ">
                         <div className="bg-gray-50 flex items-center justify-center p-8">
                             <div className="bg-gradient-to-br from-blue-50 to-rose-50 rounded-xl p-8 w-full h-full flex items-center justify-center">
                                 <div className="text-center">
@@ -125,7 +81,7 @@ const AboutPage = () => {
                 </div>
 
                 {/* Features Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                     {features.map((feature, index) => (
                         <motion.div
                             key={index}
@@ -147,7 +103,7 @@ const AboutPage = () => {
                             </p>
                         </motion.div>
                     ))}
-                </div>
+                </div> */}
 
                 {/* Team Section */}
                 <div className="text-center mb-16">
@@ -158,7 +114,7 @@ const AboutPage = () => {
                 </div>
 
                 {/* CTA Section */}
-                <div className="bg-gradient-to-r from-blue-500 to-rose-500 rounded-2xl p-12 text-center text-white">
+                {/* <div className="bg-gradient-to-r from-blue-500 to-rose-500 rounded-2xl p-12 text-center text-white">
                     <h2 className="text-3xl font-bold mb-4">
                         Experience Our Hackathon Innovation
                     </h2>
@@ -166,10 +122,10 @@ const AboutPage = () => {
                         Try our proof-of-concept that blends traditional
                         diagnostics with AI technology
                     </p>
-                </div>
+                </div> */}
             </div>
         </motion.div>
     );
 };
 
-export default AboutPage;
+export default AboutSection;

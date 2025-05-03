@@ -10,13 +10,8 @@ const Navbar = () => {
     const navItems = [
         { name: "Home", href: "/" },
         {
-            name: "About",
-            href: "/about",
-            icon: <Activity className="h-4 w-4" />,
-        },
-        {
             name: "GitHub",
-            href: "#github",
+            href: "https://github.com/username/reponame",
             icon: <Github className="h-4 w-4" />,
         },
     ];
@@ -51,7 +46,7 @@ const Navbar = () => {
                         <Stethoscope className="h-6 w-6 text-rose-500" />
                     </motion.div>
                     <motion.span className="text-2xl font-bold bg-gradient-to-r from-rose-600 to-blue-600 bg-clip-text text-transparent">
-                        <Link href="/">AITongueInsight</Link>
+                        <Link href="/">Tongue Diagnostics</Link>
                     </motion.span>
                 </motion.div>
 
@@ -68,6 +63,7 @@ const Navbar = () => {
                             >
                                 <Link
                                     href={item.href}
+                                    scroll={false}
                                     className="flex items-center gap-2 text-gray-700 hover:text-rose-600 transition-colors duration-300 group"
                                 >
                                     {item.icon && (

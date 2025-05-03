@@ -248,10 +248,7 @@ function TechStack() {
                                 transition={{ duration: 0.8 }}
                             />
                             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                                Our model analyzes tongue color, coating, and
-                                texture using convolutional neural networks
-                                trained on 50,000+ clinical images with 95%
-                                diagnostic accuracy.
+                                
                             </p>
                         </motion.div>
 

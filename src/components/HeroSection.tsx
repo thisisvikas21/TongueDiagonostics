@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown, Sparkles } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export function HeroSection() {
     const ref = useRef(null);
@@ -60,27 +61,16 @@ export function HeroSection() {
             ref={ref}
             className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-slate-50"
         >
+            {/* Logo in background - fixed position with low opacity */}
+
             {/* Animated background elements */}
             <motion.div
-                style={{ y: yBg, opacity: opacityBg }}
+                style={{ y: yBg }}
                 className="pointer-events-none absolute inset-0 z-0 h-full w-full"
             >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-rose-100 via-blue-50 to-white"></div>
-                <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-transparent via-white to-rose-50 opacity-60"
-                    animate={{
-                        backgroundPosition: ["0% 0%", "100% 100%"],
-                    }}
-                    transition={{
-                        duration: 15,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        ease: "linear",
-                    }}
-                />
             </motion.div>
 
-            {/* Add near your floating particles */}
             <motion.div
                 className="absolute right-[10%] top-[30%] z-10 hidden lg:block"
                 initial={{ opacity: 0, y: -50 }}
@@ -102,23 +92,29 @@ export function HeroSection() {
                         <div className="h-6 w-24 bg-gray-800 rounded-full"></div>
                     </div>
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                            <motion.div
-                                className="absolute inset-0 bg-gradient-to-br from-rose-300 to-blue-300"
-                                animate={{
-                                    scale: [1, 1.1, 1],
-                                    rotate: [0, 360],
-                                }}
-                                transition={{
-                                    duration: 15,
-                                    repeat: Infinity,
-                                    ease: "linear",
-                                }}
+                        <motion.div
+                            className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-lg"
+                            animate={{
+                                scale: [1, 1.05, 1], // Subtle pulse instead of rotation
+                            }}
+                            transition={{
+                                duration: 6,
+                                repeat: Infinity,
+                                repeatType: "reverse",
+                            }}
+                        >
+                            <Image
+                                src="/logo.png"
+                                alt="Your Logo"
+                                width={400}
+                                height={400}
+                                className="object-cover rounded-full p-4"
                             />
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </motion.div>
+
             {/* Floating particles */}
             {[...Array(20)].map((_, i) => (
                 <motion.div
@@ -146,38 +142,13 @@ export function HeroSection() {
                     }}
                 />
             ))}
-
             {/* Content container */}
             <motion.div
                 initial="hidden"
                 animate="show"
                 variants={container}
-                className="relative z-20 mx-auto max-w-6xl px-4 text-center"
+                className="relative z-20 mx-auto max-w-6xl px-4 text-center flex flex-col"
             >
-                <motion.div
-                    variants={item}
-                    className="mb-6 inline-flex items-center rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-600 shadow-sm"
-                    whileHover={{ scale: 1.05 }}
-                >
-                    <motion.span
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ repeat: Infinity, duration: 2 }}
-                        className="mr-2 h-2 w-2 rounded-full bg-rose-500"
-                    />
-                    Revolutionizing Traditional Diagnostics
-                    <motion.span
-                        className="ml-2"
-                        animate={{ rotate: 360 }}
-                        transition={{
-                            repeat: Infinity,
-                            duration: 4,
-                            ease: "linear",
-                        }}
-                    >
-                        <Sparkles className="h-4 w-4 text-rose-400" />
-                    </motion.span>
-                </motion.div>
-
                 <motion.h1
                     variants={item}
                     style={{ scale: titleScale, y: titleY }}
@@ -246,16 +217,6 @@ export function HeroSection() {
                             </motion.span>
                         </Link>
                     </Button>
-                    <motion.div whileHover={{ scale: 1.05 }}>
-                        <Button
-                            variant="outline"
-                            className="rounded-full px-8 py-6 text-lg font-semibold"
-                        >
-                            <motion.span whileHover={{ x: 2 }}>
-                                Learn How It Works
-                            </motion.span>
-                        </Button>
-                    </motion.div>
                 </motion.div>
             </motion.div>
 
@@ -296,50 +257,6 @@ export function HeroSection() {
                         </div>
                     ))}
                 </div>
-            </motion.div>
-
-            {/* Stats preview */}
-            <motion.div
-                initial="hidden"
-                animate="show"
-                variants={statsContainer}
-                className="absolute bottom-10 left-0 right-0 z-20 mx-auto hidden max-w-7xl px-6 md:block"
-            >
-                <motion.div
-                    variants={item}
-                    whileHover={{ scale: 1.02 }}
-                    className="grid grid-cols-3 gap-8 rounded-2xl bg-white/80 p-6 backdrop-blur-md shadow-lg"
-                >
-                    {[
-                        { value: "95%", label: "Accuracy" },
-                        { value: "~5s", label: "Analysis Time" },
-                        { value: "4", label: "Health Metrics" },
-                    ].map((stat, index) => (
-                        <motion.div
-                            key={index}
-                            variants={statItem}
-                            whileHover={{ scale: 1.05 }}
-                            className="text-center"
-                        >
-                            <motion.p
-                                className="text-3xl font-bold text-rose-600"
-                                animate={{
-                                    scale: [1, 1.1, 1],
-                                }}
-                                transition={{
-                                    duration: 2,
-                                    repeat: Infinity,
-                                    delay: index * 0.5,
-                                }}
-                            >
-                                {stat.value}
-                            </motion.p>
-                            <p className="mt-1 text-sm font-medium text-gray-500">
-                                {stat.label}
-                            </p>
-                        </motion.div>
-                    ))}
-                </motion.div>
             </motion.div>
         </div>
     );

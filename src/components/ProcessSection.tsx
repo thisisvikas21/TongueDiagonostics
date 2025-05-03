@@ -49,19 +49,19 @@ function HowItWorks() {
     const steps = [
         {
             title: "Capture Image",
-            description: "Take a photo of your tongue using your smartphone camera",
+            description: "",
             icon: <CameraIcon className="h-8 w-8" />,
             color: "bg-rose-100",
         },
         {
             title: "AI Analysis",
-            description: "Our deep learning model processes 20+ health indicators",
+            description: "",
             icon: <CpuIcon className="h-8 w-8" />,
             color: "bg-blue-100",
         },
         {
             title: "Get Insights",
-            description: "Receive immediate health feedback with actionable recommendations",
+            description: "",
             icon: <ActivityIcon className="h-8 w-8" />,
             color: "bg-emerald-100",
         },
@@ -174,12 +174,6 @@ function HowItWorks() {
                             <p className="text-gray-600 mb-4">
                                 {step.description}
                             </p>
-                            <motion.div
-                                whileHover={{ x: 5 }}
-                                className="inline-flex items-center text-rose-500 font-medium"
-                            >
-                                Learn more <ChevronRight className="ml-1 h-4 w-4" />
-                            </motion.div>
                         </motion.div>
                     ))}
                 </div>
