@@ -62,10 +62,9 @@ const SendImage = () => {
         setMessage(null);
 
         try {
-            // Simulate API call (replace with actual implementation)
+            // Simulate API call
             await new Promise((resolve) => setTimeout(resolve, 8000));
 
-            // Your actual API call would go here
             // const response = await fetch("/api/analyze", {...});
 
             setMessage({
@@ -234,7 +233,7 @@ const SendImage = () => {
                     whileHover={{ x: 3 }}
                     className="mt-8 text-gray-500 hover:text-gray-700 flex items-center justify-center gap-1 transition-colors"
                 >
-                    <Link href="/dashboard">← Back to dashboard</Link>
+                    <Link href="/">← Back to home</Link>
                 </motion.div>
             </div>
         </motion.div>
