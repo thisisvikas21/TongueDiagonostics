@@ -200,7 +200,7 @@ const sampleResult: AnalysisResult = {
     score: 5,
     metrics: {
         color: 8,
-        coating: 6,
+        coating: 10,
         texture: 7,
         shape: 5,
     },

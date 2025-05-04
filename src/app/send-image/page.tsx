@@ -35,6 +35,8 @@ const SendImage = () => {
     } | null>(null);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -51,15 +53,11 @@ const SendImage = () => {
     ) => {
         const file = event.target.files?.[0];
         if (!file) return;
-
+    
         try {
             setIsUploading(true);
-            setMessage(null);
-
-            if (file.size > 100 * 1024 * 1024) {
-                throw new Error("Image too large (max 5MB)");
-            }
-
+            setSelectedFile(file); // <— add this
+    
             const reader = new FileReader();
             reader.onloadend = () => {
                 const base64Image = reader.result as string;
@@ -74,30 +72,43 @@ const SendImage = () => {
         } catch (error) {
             setIsUploading(false);
             setMessage({
-                text:
-                    error instanceof Error
-                        ? error.message
-                        : "Failed to load image",
+                text: error instanceof Error ? error.message : "Failed to load image",
                 type: "error",
             });
         }
     };
+    
 
     const analyzeImage = async () => {
-        if (!imageUrl) return;
-
+        if (!fileInputRef.current || !fileInputRef.current.files?.[0]) {
+            setMessage({ text: "No image selected.", type: "error" });
+            return;
+        }
+    
+        const file = fileInputRef.current.files[0];
         setIsAnalyzing(true);
         setMessage(null);
-
+    
         try {
-         
-            const analysisResults = await mockAPICall(imageUrl);
-
+            const formData = new FormData();
+            formData.append("image", file);
+    
+            const res = await fetch("http://localhost:8000/analyze", {
+                method: "POST",
+                body: formData,
+            });
+    
+            if (!res.ok) {
+                throw new Error("Failed to analyze image");
+            }
+    
+            const analysisResults = await res.json();
+    
             sessionStorage.setItem(
                 "analysisResults",
                 JSON.stringify(analysisResults)
             );
-
+    
             router.push("/result");
         } catch (error) {
             setMessage({
@@ -108,7 +119,7 @@ const SendImage = () => {
             setIsAnalyzing(false);
         }
     };
-
+    
     const mockAPICall = async (imageUrl: string) => {
         await new Promise((resolve) => setTimeout(resolve, 2000));
         return {
